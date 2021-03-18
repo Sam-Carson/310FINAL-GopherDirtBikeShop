@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BikesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BikesModelStoreContainer">
+    <EntitySet Name="Bikes" EntityType="BikesModel.Store.Bikes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Components" EntityType="BikesModel.Store.Components" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="BikeComponent" Association="BikesModel.Store.BikeComponent">
+      <End Role="Bike" EntitySet="Bikes" />
+      <End Role="Component" EntitySet="Components" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bikes">
+    <Key>
+      <PropertyRef Name="BikeID" />
+    </Key>
+    <Property Name="BikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComponentID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Size" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Color" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Components">
+    <Key>
+      <PropertyRef Name="ComponentID" />
+    </Key>
+    <Property Name="ComponentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fork" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Drivetrain" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RearSuspension" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WheelSize" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Bike_BikeID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="BikeComponent">
+    <End Role="Bike" Type="BikesModel.Store.Bikes" Multiplicity="1" />
+    <End Role="Component" Type="BikesModel.Store.Components" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bike">
+        <PropertyRef Name="BikeID" />
+      </Principal>
+      <Dependent Role="Component">
+        <PropertyRef Name="Bike_BikeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="BikesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="BikesModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bikes" EntityType="BikesModel.Bike" />
+          <EntitySet Name="Components" EntityType="BikesModel.Component" />
+          <AssociationSet Name="BikeComponent" Association="BikesModel.BikeComponent">
+            <End Role="Bike" EntitySet="Bikes" />
+            <End Role="Component" EntitySet="Components" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bike">
+          <Key>
+            <PropertyRef Name="BikeID" />
+          </Key>
+          <Property Name="BikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <Property Name="Brand" Type="String" Nullable="false" />
+          <Property Name="Model" Type="String" Nullable="false" />
+          <Property Name="Size" Type="String" Nullable="false" />
+          <Property Name="Color" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Components" Relationship="BikesModel.BikeComponent" FromRole="Bike" ToRole="Component" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentID" />
+          </Key>
+          <Property Name="ComponentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fork" Type="String" Nullable="false" />
+          <Property Name="Drivetrain" Type="String" Nullable="false" />
+          <Property Name="RearSuspension" Type="String" Nullable="false" />
+          <Property Name="WheelSize" Type="String" Nullable="false" />
+          <NavigationProperty Name="Bike" Relationship="BikesModel.BikeComponent" FromRole="Component" ToRole="Bike" />
+        </EntityType>
+        <Association Name="BikeComponent">
+          <End Type="BikesModel.Bike" Role="Bike" Multiplicity="1" />
+          <End Type="BikesModel.Component" Role="Component" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BikesModelStoreContainer" CdmEntityContainer="BikesModelContainer">
+    <EntitySetMapping Name="Bikes">
+      <EntityTypeMapping TypeName="IsTypeOf(BikesModel.Bike)">
+        <MappingFragment StoreEntitySet="Bikes">
+          <ScalarProperty Name="BikeID" ColumnName="BikeID" />
+          <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Components">
+      <EntityTypeMapping TypeName="IsTypeOf(BikesModel.Component)">
+        <MappingFragment StoreEntitySet="Components">
+          <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+          <ScalarProperty Name="Fork" ColumnName="Fork" />
+          <ScalarProperty Name="Drivetrain" ColumnName="Drivetrain" />
+          <ScalarProperty Name="RearSuspension" ColumnName="RearSuspension" />
+          <ScalarProperty Name="WheelSize" ColumnName="WheelSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="BikeComponent" TypeName="BikesModel.BikeComponent" StoreEntitySet="Components">
+      <EndProperty Name="Bike">
+        <ScalarProperty Name="BikeID" ColumnName="Bike_BikeID" />
+      </EndProperty>
+      <EndProperty Name="Component">
+        <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

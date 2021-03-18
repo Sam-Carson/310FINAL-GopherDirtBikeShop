@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gopher Dirt Bike Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="Content/site.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="box1">
+            <h3>All Bikes</h3>
+            <ul id="bikes" class="list-group" />
+        </div>
+        <div class="box2">
+            <h3>Search by Bike Id</h3>
+            <input type="text" id="bikeID" size="5" />
+            <input type="button" value="Search" class="btn btn-info" onclick="find();" />
+            <p id="bike" />
+        </div>
+
+        <div class="box3">
+            <h3>Delete a bike by Id</h3>
+            <input type="text" id="deleteBikeID" size="5" />
+            <input type="button" value="Delete" class="btn btn-danger" onclick="deleteBike();" />
+        </div>
+
+        <div class="box4">
+            <h3>Add a bike</h3>
+            <p>Bike Information</p>
+            Brand: <input type="text" id="newBrand" size="25" />
+            Model: <input type="text" id="newModel" size="25" />
+            Type: <input type="text" id="newType" size="25" />
+            Size: <input type="text" id="newSize" size="25" />
+            Color: <input type="text" id="newColor" size="25" />
+            Description: <input type="text" id="newDescription" size="75" />
+            <p>Bike Components</p>
+            Fork: <input type="text" id="newFork" size="25" />
+            Drivetrain: <input type="text" id="newDrivetrain" size="25" />
+            Rear suspension: <input type="text" id="newRearSuspension" size="25" />
+            Wheel size: <input type="text" id="newWheelSize" size="25" />
+
+            <input type="button" value="Add Bike" class="btn btn-primary" onclick="addBike();" />
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/main.js"></script>
+</body>
+</html>
